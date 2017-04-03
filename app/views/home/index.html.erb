@@ -1,0 +1,52 @@
+<h1>Home#indexここがメインのページになりたい</h1>
+
+
+<% if user_signed_in? %>
+<%=link_to 'プロフィール画像と自己紹介の設定',new_profile_path(@profile) %>
+
+  <p>Find me in app/views/home/index.html.erb</p>
+
+  <strong>Picture:</strong>
+  <!--- Modelのstyleで指定した :midium など渡すことでサイズを指定できる -->
+  <% if current_user.profile.present? %>
+    <%= image_tag current_user.profile.photo.url(:medium) %>
+    <p>
+      <strong>自己紹介:</strong>
+      プロフィール：<%= current_user.profile.comment %>
+      Logged in as <%= current_user.username %>
+    </p>
+  <% end %>
+ 
+<% end %>
+
+<p id="notice"><%= notice %></p>
+<% if user_signed_in? %>
+<h1>Articles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= article.title %></td>
+        <td><%= article.description %></td>
+        <td><%= link_to 'Show', article %></td>
+        <td><%= link_to 'Edit', edit_article_path(article) %></td>
+        <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Article', new_article_path %>
+<% end %>
+

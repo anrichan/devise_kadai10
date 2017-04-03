@@ -1,0 +1,14 @@
+<%= form_for(@profile) do |f| %>
+<div class="field">
+    <%= f.label "自己紹介" %><br>
+    <%= f.text_area :comment %>
+  </div>
+  <div class="field">
+  <%= f.label "画像" %><br>
+    <%= f.file_field :photo %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<p>Find me in app/views/profiles/new.html.erb</p>
